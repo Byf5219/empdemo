@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -28,5 +29,12 @@ public class DeptController {
         param.put("pageInfo",pageInfo);
         httpSession.setAttribute("deptPageNum",pageInfo.getPageNum());
         return "deptlist";
+    }
+
+    @RequestMapping(value = {"/deleteDeptById"})
+    public String deleteDeptById(int[] id,HttpSession httpSession){
+        deptService.deleteDeptById(id);
+        Integer pageNum = (Integer) httpSession.getAttribute("deptPageNum");
+        return "redirect:/dept/deptlist?pageNum=" + pageNum;
     }
 }

@@ -6,4 +6,11 @@
     <select id="listDept" resultType="com.neuedu.entity.Dept">
         SELECT id,dname,location FROM e_dept
     </select>
+
+    <delete id="deleteDeptById">
+        DELETE FROM e_dept WHERE id IN
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

@@ -10,4 +10,11 @@ public interface DeptService {
      * @return
      */
     List<Dept> listDept();
+
+    /**
+     *根据id数组删除dept
+     * @param ids
+     * @return 影响行数
+     */
+    Integer deleteDeptById(int[] ids);
 }
