@@ -29,7 +29,7 @@
   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
       <property name="basePackage" value="com.neuedu.mapper"></property>
   </bean>
-<!--整合mybatis结束-->
+  <!--整合mybatis结束-->
 
   <!--配置事物开始-->
   <!--配置事物管理器-->

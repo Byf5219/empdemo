@@ -31,14 +31,14 @@ public class EmpController {
         PageInfo<Emp> pageInfo = new PageInfo<>(empList,10);
         param.put("pageInfo",pageInfo);
         //将当前页码存入到session中
-        httpSession.setAttribute("pageNum",pageInfo.getPageNum());
+        httpSession.setAttribute("empPageNum",pageInfo.getPageNum());
         return "emplist";
     }
 
     @RequestMapping(value = {"/deleteEmpById"})
     public String deleteEmpById(int[] id,HttpSession httpSession){
         empService.deleteEmpByIds(id);
-        Integer pageNum = (Integer) httpSession.getAttribute("pageNum");
+        Integer pageNum = (Integer) httpSession.getAttribute("empPageNum");
         return "redirect:/emp/emplist?pageNum= " + pageNum;
     }
 
@@ -64,7 +64,7 @@ public class EmpController {
     @RequestMapping(value = {"/updateEmp"})
     public String updateEmp(Emp emp,HttpSession httpSession){
         empService.updateEmp(emp);
-        Integer pageNum = (Integer) httpSession.getAttribute("pageNum");
+        Integer pageNum = (Integer) httpSession.getAttribute("empPageNum");
         return "redirect:/emp/emplist?pageNum= " + pageNum;
     }
 
