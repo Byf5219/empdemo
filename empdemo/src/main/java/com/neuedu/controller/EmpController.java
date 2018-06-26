@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
@@ -48,7 +49,8 @@ public class EmpController {
         return "addEmp";
     }
 
-    @RequestMapping(value = {"/addEmp"})
+    //method为限制请求类型
+    @RequestMapping(value = {"/addEmp"},method ={RequestMethod.POST} )
     public String addEmp(Emp emp){
         int pageNum = empService.saveEmp(emp);
         return "redirect:/emp/emplist?pageNum=" + pageNum;

@@ -9,7 +9,12 @@
 </head>
 <body>
 <div class="container">
-    <div class="row head"></div>
+    <div class="row head">
+        <div class="col-sm-2">
+            ${user.username}
+            <img src="${pageContext.request.contextPath}${user.headimg}" class="img-circle" height="20px" width="20px">
+        </div>
+    </div>
     <div class="row">
         <table class="table table-striped table-hover">
             <thead>
