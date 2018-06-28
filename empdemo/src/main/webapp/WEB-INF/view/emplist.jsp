@@ -10,9 +10,13 @@
 <body>
 <div class="container">
     <div class="row head">
-        <div class="col-sm-2">
-            ${user.username}
+        <div class="col-sm-6">
+            <h1>员工管理系统</h1>
+        </div>
+        <div class="col-sm-6">
+            <p class="text-right">欢迎您：${user.username}
             <img src="${pageContext.request.contextPath}${user.headimg}" class="img-circle" height="20px" width="20px">
+            </p>
         </div>
     </div>
     <div class="row">
@@ -50,8 +54,9 @@
     </div>
     <div class="row">
         <div class="col-sm-9">
-            <button type="button" class="btn btn-primary addEmp">增加</button>
+            <button type="button" class="btn btn-primary toDeptlist" >部门列表</button>
             <button type="button" class="btn btn-danger deleteAll" >删除</button>
+            <button type="button" class="btn btn-primary addEmp">增加</button>
         </div>
         <div class="col-sm-3">
             <nav aria-label="Page navigation">
@@ -154,6 +159,10 @@
             //$(this)代表着获取当前触发这个方法的那个节点对象
             var id = $(this).attr("update-id");
             var path = "${pageContext.request.contextPath}/emp/updateEmpView?id=" + id;
+            location.href = path;
+        })
+        $(".toDeptlist").click(function () {
+            var path = "${pageContext.request.contextPath}/dept/deptlist";
             location.href = path;
         })
     })

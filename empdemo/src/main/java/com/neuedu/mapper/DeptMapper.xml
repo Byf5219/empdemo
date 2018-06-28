@@ -7,10 +7,22 @@
         SELECT id,dname,location FROM e_dept
     </select>
 
+    <select id="selsctDeptById" resultType="com.neuedu.entity.Dept">
+        SELECT id,dname,location FROM e_dept WHERE id = #{id}
+    </select>
+
     <delete id="deleteDeptById">
         DELETE FROM e_dept WHERE id IN
         <foreach collection="array" item="id" open="(" close=")" separator=",">
             #{id}
         </foreach>
     </delete>
+
+    <insert id="savaDept" parameterType="com.neuedu.entity.Dept">
+        INSERT INTO e_dept(dname,location) VALUES (#{dname},#{location})
+    </insert>
+
+    <update id="updateDept" parameterType="com.neuedu.entity.Dept">
+        UPDATE e_dept set dname = #{dept.dname},location = #{dept.location} WHERE id = #{dept.id}
+    </update>
 </mapper>

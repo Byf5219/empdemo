@@ -4,18 +4,37 @@ import com.neuedu.entity.User;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginInterceptor implements HandlerInterceptor{
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+        //判断session中是否有user对象
         HttpSession httpSession = httpServletRequest.getSession();
         User user = (User) httpSession.getAttribute("user");
         if(user == null){
-            httpServletResponse.sendRedirect("/empdemo/user/loginView");
-            return false;
+            //如果session中没有，则看cookie中是否有user对象
+            Cookie[] cookies = httpServletRequest.getCookies();
+            Map<String,Cookie> cookieMap = new HashMap<>();
+            if(cookies != null){
+                for (Cookie cookie:cookies) {
+                    cookieMap.put(cookie.getName(),cookie);
+                }
+                if(cookieMap.get("username") != null){
+                    return true;
+                }else{
+                    httpServletResponse.sendRedirect("/empdemo/user/loginView");
+                    return false;
+                }
+            }else{
+                httpServletResponse.sendRedirect("/empdemo/user/loginView");
+                return false;
+            }
         }
         return true;
     }

@@ -37,4 +37,29 @@ public class DeptController {
         Integer pageNum = (Integer) httpSession.getAttribute("deptPageNum");
         return "redirect:/dept/deptlist?pageNum=" + pageNum;
     }
+    @RequestMapping(value = {"/addDeptView"})
+    public String addDeptView(){
+        return "addDept";
+    }
+
+    @RequestMapping(value = {"/addDept"})
+    public String addDept(Dept dept,HttpSession httpSession){
+        deptService.savaDept(dept);
+        Integer pageNum = (Integer) httpSession.getAttribute("deptPageNum");
+        return "redirect:/dept/deptlist?pageNum=" + pageNum;
+    }
+
+    @RequestMapping(value = {"/updateDeptView"})
+    public String updateDeptView(ModelMap param,int id){
+        param.put("deptList",deptService.listDept());
+        param.put("id",id);
+        return "updateDept";
+    }
+    @RequestMapping(value = {"/updateDept"})
+    public String updateDept(Dept dept,HttpSession httpSession){
+        System.out.println(dept);
+        deptService.updateDept(dept);
+        Integer pageNum = (Integer) httpSession.getAttribute("deptPageNum");
+        return "redirect:/dept/deptlist?pageNum=" + pageNum;
+    }
 }

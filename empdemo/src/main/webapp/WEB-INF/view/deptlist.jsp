@@ -10,7 +10,16 @@
 </head>
 <body>
     <div class="container">
-        <div class="row head"></div>
+        <div class="row head">
+            <div class="col-sm-6">
+                <h1>员工管理系统</h1>
+            </div>
+            <div class="col-sm-6">
+                <p class="text-right">欢迎您：${user.username}
+                    <img src="${pageContext.request.contextPath}${user.headimg}" class="img-circle" height="20px" width="20px">
+                </p>
+            </div>
+        </div>
         <div class="row">
             <table class="table table-striped table-hover">
                 <thead>
@@ -30,7 +39,7 @@
                         <td>${dept.dname}</td>
                         <td>${dept.location}</td>
                         <td>
-                            <button type="button" class="btn btn-info">修改</button>
+                            <button type="button" class="btn btn-info update-btn" update-id="${dept.id}">修改</button>
                             <button type="button" class="btn btn-danger delete-one" delete-id="${dept.id}">删除</button>
                         </td>
                     </tr>
@@ -40,8 +49,9 @@
         </div>
         <div class="row">
             <div class="col-sm-9">
-                <button type="button" class="btn btn-primary">增加</button>
+                <button type="button" class="btn btn-primary toEmplist" >员工列表</button>
                 <button type="button" class="btn btn-danger delete-all">删除</button>
+                <button type="button" class="btn btn-primary addDept">增加</button>
             </div>
             <div class="col-sm-3">
                 <nav aria-label="Page navigation">
@@ -97,7 +107,7 @@
             });
             $(".check-all").click(function () {
                 $(".item").prop("checked",$(this).prop("checked"));
-            })
+            });
             $(".delete-all").click(function () {
                 var ids = [];
                $(".item").each(function () {
@@ -107,6 +117,19 @@
                    }
                });
                 var path = "${pageContext.request.contextPath}/dept/deleteDeptById?id=" + ids;
+                location.href = path;
+            });
+            $(".addDept").click(function () {
+                var path = "${pageContext.request.contextPath}/dept/addDeptView";
+                location.href = path;
+            });
+            $(".update-btn").click(function () {
+                var id = $(this).attr("update-id");
+                var path = "${pageContext.request.contextPath}/dept/updateDeptView?id=" + id;
+                location.href = path;
+            });
+            $(".toEmplist").click(function () {
+                var path = "${pageContext.request.contextPath}/emp/emplist";
                 location.href = path;
             });
         });
