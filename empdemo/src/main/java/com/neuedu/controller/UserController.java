@@ -87,4 +87,18 @@ public class UserController {
         }
     }
 
+    @RequestMapping(value = {"/exit"})
+    public String exit(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse,HttpSession httpSession){
+       httpSession = httpServletRequest.getSession();
+       User user = (User) httpSession.getAttribute("user");
+       if(user != null){
+           httpSession.removeAttribute("user");
+       }
+        Cookie cookie = new Cookie("username",null);
+        cookie.setPath("/empdemo");
+        cookie.setMaxAge(0);
+        httpServletResponse.addCookie(cookie);
+        return "redirect:/user/loginView";
+    }
+
 }

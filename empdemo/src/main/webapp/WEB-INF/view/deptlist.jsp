@@ -35,7 +35,7 @@
                 <c:forEach items="${pageInfo.list}" var="dept" varStatus="index">
                     <tr>
                         <td><input type="checkbox" class="item" value="${dept.id}"></td>
-                        <td>${index.index}</td>
+                        <td>${index.index+1}</td>
                         <td>${dept.dname}</td>
                         <td>${dept.location}</td>
                         <td>

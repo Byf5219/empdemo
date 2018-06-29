@@ -20,16 +20,14 @@ public class LoginInterceptor implements HandlerInterceptor{
         if(user == null){
             //如果session中没有，则看cookie中是否有user对象
             Cookie[] cookies = httpServletRequest.getCookies();
-            Map<String,Cookie> cookieMap = new HashMap<>();
             if(cookies != null){
                 for (Cookie cookie:cookies) {
-                    cookieMap.put(cookie.getName(),cookie);
-                }
-                if(cookieMap.get("username") != null){
-                    return true;
-                }else{
-                    httpServletResponse.sendRedirect("/empdemo/user/loginView");
-                    return false;
+                    if (cookie.getValue()!= null && cookie.getName().equals("username")) {
+                        return true;
+                    } else {
+                        httpServletResponse.sendRedirect("/empdemo/user/loginView");
+                        return false;
+                    }
                 }
             }else{
                 httpServletResponse.sendRedirect("/empdemo/user/loginView");

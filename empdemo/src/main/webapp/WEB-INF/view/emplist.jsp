@@ -15,7 +15,10 @@
         </div>
         <div class="col-sm-6">
             <p class="text-right">欢迎您：${user.username}
-            <img src="${pageContext.request.contextPath}${user.headimg}" class="img-circle" height="20px" width="20px">
+                <img src="${pageContext.request.contextPath}${user.headimg}" class="img-circle" height="20px" width="20px">
+            </p>
+            <p class="text-right">
+                <a href="${pageContext.request.contextPath}/user/exit">退出</a>
             </p>
         </div>
     </div>
